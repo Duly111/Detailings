@@ -1,0 +1,17 @@
+@import "marcet-page.css";
+@import "home-page.css";
+@import "contacts-page.css";
+@import "popUpMessage.css";
+@import "page404.css";
+@import "productDetails.css";
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font: 18px/1.5 "Karla",sans-serif;
+}

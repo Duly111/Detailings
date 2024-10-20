@@ -1,0 +1,296 @@
+
+
+/* About Header  */
+
+header {
+    background-color: white ;
+    padding-top: 20px;
+    padding-bottom: 35px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+nav {
+    display: flex;
+    gap: 15px;
+}
+nav a {
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    justify-content: space-around;
+}
+nav a:hover {
+    background-color: #555;
+    color: white;
+}
+.logo img {
+    height: 50px;
+    width: auto;
+    cursor: pointer;
+}
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+.search-box input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.search-box input[type="submit"] {
+    padding: 8px 15px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search-box input[type="submit"]:hover {
+    background-color: #777;
+}
+
+ /* Section with short information about us  */
+.guide-marcet {
+    height: 300px;
+    background-image: url('https://automedia.investor.bg/media/files/resized/uploadedfiles/640x0/12b/5579efd98e91ea3ab281039fc5ef412b-08-1.jpg'); /* Вмъква фоновото изображение */
+    background-size: cover; /* Фоновото изображение покрива целия елемент */
+    background-position: center; /* Центриране на фоновото изображение */
+    background-repeat: no-repeat; /* Изображението няма да се повтаря */
+    padding: 50px; /* Отстояние вътре в секцията */
+    color: #333; /* Основен цвят на текста */
+    text-align: center; /* Центриране на текста */
+}
+
+.guide-title h2 {
+    color: #FFFFFF;
+    font-family: "Plus Jakarta Sans", Sans-serif;
+    font-size: 75px;
+    margin-bottom: 20px;
+}
+
+.guide-title{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* Marcet Section */
+.marcet-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+
+/* Filter Section */
+.filter-section {
+    width: 20%;  /* Намалена ширина за повече място на продуктите */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px; /* Отстояние от продуктовата част */
+}
+
+.filter-section ul li:hover {
+    background-color: #eee; /* Лек фон при hover */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+/* Product Section */
+.product-section {
+    width: 75%;  /* Увеличена ширина за по-добро представяне на продуктите */
+    padding: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;  /* По-голямо разстояние между продуктите */
+    justify-content: space-between; /* Продуктите ще бъдат подредени вляво */
+}
+
+
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    flex: 1 1 calc(30% - 30px); /* 3 продукта в ред с еднакво пространство между тях */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Добавен ефект при hover */
+}
+
+.product-item:hover {
+    transform: translateY(-5px); /* Повдигане на продукта при hover */
+}
+
+.product-item img {
+    width: 100%;
+    height: 220px; /* Фиксирана височина за еднакви изображения */
+    object-fit: cover; /* Прави изображението да се побере добре в рамките */
+    border-radius: 5px;
+}
+
+/* Категория, Име, Рейтинг и Цена винаги да са видими */
+.product-item .category,
+.product-item h4,
+.product-item .rating,
+.product-item .price {
+    opacity: 1;  /* Напълно видими */
+    visibility: visible;  /* Напълно видими */
+    display: block;  /* Показвай елемента */
+    transition: none;  /* Без ефекти за видимостта */
+}
+
+.product-item .category {
+  font-size: 14px;
+  color: #ff002fd9;
+  margin-top: 10px;
+}
+
+.product-item h4 {
+  color: #333;
+  font-size: 18px;
+  margin: 10px 0;
+
+}
+
+.product-item .rating {
+  color: #ff9800;
+  font-size: 16px;
+}
+
+.product-item .price {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Винаги показвай текстовата информация */
+.product-item .category,
+.product-item h4,
+.product-item .rating,
+.product-item .price {
+    display: block;
+    opacity: 1;  /* Винаги видимо */
+    visibility: visible;  /* Винаги видимо */
+    transition: none;  /* Премахни всякакви hover ефекти върху видимостта */
+}
+
+
+.search-bar input[type="text"], .search-bar select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(70% - 10px); /* Ширина за по-добро разпределение */
+}
+
+.search-bar input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-bar select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Contact section */
+
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    background-color: #4457FF;
+}
+
+.contacts-header {
+    color: #fff;
+    font-size: 57px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.contact-header {
+    color: #fff;
+    font-size: 57px;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 550px;
+    width: 1200px;
+    background-color: #2D42FF;
+    border-radius: 20px;
+    margin: 70px 0;
+}
+
+
+.phone, .email {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.phone span:first-child, .email span:first-child {
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+.phone span:first-child::before {
+    content: "\260E"; /* Unicode за стара иконка на телефон */
+    color: #fff; /* Правим иконата бяла */
+    font-size: 30px;
+}
+
+.email span:first-child::before {
+    content: "\2709"; /* Unicode за иконка на писмо */
+    color: #fff; /* Правим иконата бяла */
+    font-size: 30px;
+}
+
+
+
+
