@@ -49,7 +49,7 @@ export default function ProductDetails() {
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
             <input type="number" defaultValue={1} min={1} />
-            <button>Добавяне в количката</button>
+            <button >Добавяне в количката</button> {/*onClick={addIdOfProduct(productId)} */}
           </div>
         </div>
       </div>

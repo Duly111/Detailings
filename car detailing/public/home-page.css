@@ -1,11 +1,8 @@
-
-
 /* About Header  */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* background-color: #2D90AF; */
 }
 header {
     background-color: white ;
@@ -58,6 +55,8 @@ nav a:hover {
 .search-box input[type="submit"]:hover {
     background-color: #777;
 }
+
+
 
 /* section under the header */
 .guide {
