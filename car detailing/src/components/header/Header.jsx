@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from 'react-icons/fa';
+import { useState } from "react";
+
 
 export default function Header(){
+ 
     return(
         
         <header>
@@ -24,9 +27,9 @@ export default function Header(){
         <form action="/search" method="GET" className="search-box">
           <input type="text" name="query" placeholder="Търсене на продукти..." />
           <input type="submit" value="Търсене"  />
-          <button type="button" className="cart-button" style={{ marginLeft: '8px', backgroundColor: "white" ,color: '#555', border: 'none', padding: '8px', cursor: 'pointer' }}>
+          <Link to={"/cart"}  type="button" className="cart-button" style={{ marginLeft: '8px', backgroundColor: "white" ,color: '#555', border: 'none', padding: '8px', cursor: 'pointer' }}>
             <FaShoppingCart style={{ fontSize: '1.2em' }} />
-          </button>
+          </Link>
         </form>
       </header>
       

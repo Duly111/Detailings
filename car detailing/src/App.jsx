@@ -6,6 +6,7 @@ import MarcetPage from "./components/marcetPage/MarcetPage";
 import ContactsPage from "./components/contactsPage/ContactsPage";
 import PageNotFound from "./components/page 404/404";
 import ProductDetails from "./components/productDetails/ProductDetails";
+import Cart from "./components/cart/CartPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/products/:productId" element={<ProductDetails/>}/>
           <Route path="/*" element={<PageNotFound />}/>
+          <Route path="/cart" element={<Cart/>}/>
         </Routes>
       </main>
       <Footer />

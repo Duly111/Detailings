@@ -11,13 +11,14 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-bottom: 2px solid rgb(145, 141, 141); 
 }
 nav {
     display: flex;
     gap: 15px;
 }
 nav a {
-    font-size: 18px;
+    font-size: 10px;
     color: black;
     text-decoration: none;
     padding: 10px 15px;
@@ -40,7 +41,7 @@ nav a:hover {
 }
 .search-box input[type="text"] {
     padding: 8px;
-    font-size: 16px;
+    font-size: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }

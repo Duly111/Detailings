@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
+import Cart from "../cart/CartPage";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
@@ -49,7 +50,7 @@ export default function ProductDetails() {
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
             <input type="number" defaultValue={1} min={1} />
-            <button >Добавяне в количката</button> {/*onClick={addIdOfProduct(productId)} */}
+            <button>Добавяне в количката</button>
           </div>
         </div>
       </div>
