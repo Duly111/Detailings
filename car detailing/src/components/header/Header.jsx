@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from 'react-icons/fa';
-import { useState } from "react";
+import { useCart } from "../cart/CartContext";
 
 
 export default function Header(){
+
+  const { cartItems } = useCart(); 
+  const cartCount = cartItems.length;
  
     return(
         
@@ -25,12 +28,37 @@ export default function Header(){
           <Link to="/contacts">Контакти</Link>
         </nav>
         <form action="/search" method="GET" className="search-box">
-          <input type="text" name="query" placeholder="Търсене на продукти..." />
-          <input type="submit" value="Търсене"  />
-          <Link to={"/cart"}  type="button" className="cart-button" style={{ marginLeft: '8px', backgroundColor: "white" ,color: '#555', border: 'none', padding: '8px', cursor: 'pointer' }}>
-            <FaShoppingCart style={{ fontSize: '1.2em' }} />
-          </Link>
-        </form>
+      <input type="text" name="query" placeholder="Търсене на продукти..." />
+      <input type="submit" value="Търсене" />
+      <Link to={"/cart"} type="button" className="cart-button" style={{ 
+          position: "relative",
+          marginLeft: "8px",
+          backgroundColor: "white",
+          color: "#555",
+          border: "none",
+          padding: "8px",
+          cursor: "pointer",
+        }}
+      >
+        <FaShoppingCart style={{ fontSize: "1.2em" }} />
+        {cartCount > 0 && (
+          <span
+            style={{
+              position: "absolute",
+              top: "-11px",
+              right: "-11px",
+              color: "#555",
+              borderRadius: "50%",
+              padding: "2px -5px",
+              fontSize: "0.8em",
+              fontWeight: "bold",
+            }}
+          >
+            {cartCount}
+          </span>
+        )}
+      </Link>
+    </form>
       </header>
       
         

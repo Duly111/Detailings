@@ -1,16 +1,20 @@
+import { Route, Routes } from "react-router-dom";
+import { CartProvider } from "./components/cart/CartContext";
+
 import HomePage from "./components/homePage/HomePage";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import { Route, Routes } from "react-router-dom";
 import MarcetPage from "./components/marcetPage/MarcetPage";
 import ContactsPage from "./components/contactsPage/ContactsPage";
 import PageNotFound from "./components/page 404/404";
 import ProductDetails from "./components/productDetails/ProductDetails";
 import Cart from "./components/cart/CartPage";
 
+
 function App() {
   return (
     <>
+    <CartProvider>
       <Header />
       <main>
         <Routes>
@@ -23,6 +27,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+    </CartProvider>
     </>
   );
 }

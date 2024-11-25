@@ -117,7 +117,7 @@ export default function MarcetPage() {
           </div>
           <div className="email">
             <span className="icon" />
-            <span>ivailoradulov@gmail.com</span>
+            <span>ivailoradulov05@gmail.com</span>
           </div>
         </div>
       </div>

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
-import Cart from "../cart/CartPage";
+import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from "../cart/CartContext";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const navigate = useNavigate();
-
-  console.log(location);
+  const {addToCart} = useCart();
 
   useEffect(() => {
     (async () => {
@@ -21,10 +20,14 @@ export default function ProductDetails() {
       }
 
       const result = await response.json();
-
       setProduct(result);
+
     })();
-  }, []);
+  }, [productId,navigate]);
+
+  const handleAddToCart = () =>{
+    addToCart(productId);
+  }
 
   return (
     <>
@@ -50,7 +53,7 @@ export default function ProductDetails() {
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
             <input type="number" defaultValue={1} min={1} />
-            <button>Добавяне в количката</button>
+            <button onClick={handleAddToCart}>Добавяне в количката</button>
           </div>
         </div>
       </div>
@@ -65,11 +68,11 @@ export default function ProductDetails() {
           </button>
           <button
             className="tab-link"
-            onclick="openTab(event, 'additional-info')"
+            onClick="openTab(event, 'additional-info')"
           >
             Допълнителна информация
           </button>
-          <button className="tab-link" onclick="openTab(event, 'reviews')">
+          <button className="tab-link" onClick="openTab(event, 'reviews')">
             Отзиви (0)
           </button>
         </div>

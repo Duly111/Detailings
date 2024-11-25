@@ -1,8 +1,28 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCart } from "./CartContext";
+
 
 export default function Cart() {
-    
+  const { cartItems } = useCart();
+  const [cartProducts, setCartProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchCartProducts = async () => {
+      const products = await Promise.all(
+        cartItems.map(async (productId) => {
+          const response = await fetch(
+            `http://localhost:3030/jsonstore/advanced/articles/details/${productId}`
+          );
+          return response.json();
+        })
+      );
+      setCartProducts(products);
+    };
+
+    fetchCartProducts();
+  }, [cartItems]);
+
   return (
     <>
       <div className="cart-container">
@@ -18,38 +38,20 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="product">
-                    <span className="remove">✖</span>
-                    <img src="https://neshevdetailing.bg/wp-content/uploads/2024/11/AntiFog-Glass_500ml_1000-300x300.jpg" alt="Product Image" />
-                    <a href="#">
-                        title
-                    </a>
-                  </td>
-                  <td> price лв.</td>
-                  <td>
-                    <input type="number" defaultValue={1} min={1} className="quantity-input" />
-                  </td>
-                  <td> price  лв.</td>
-                </tr>
-                <tr>
-                  <td className="product">
-                    <span className="remove">✖</span>
-                    <img src="product-image-2.png" alt="Product Image" />
-                    <div className="product-name">
-                        <a href="#">
-                        Cleanlte AntiFog Glass+ – Препарат за стъкла против
-                        запотяване
-                        </a>
-                        <p>Количество: 0,5л</p>
-                    </div>
-                  </td>
-                  <td>13,20 лв.</td>
-                  <td>
-                    <input type="number" defaultValue={1} min={1} className="quantity-input"/>
-                  </td>
-                  <td>13,20 лв.</td>
-                </tr>
+                {cartProducts.map((product) => (
+                  <tr key={product.id}>
+                    <td className="product">
+                      <span className="remove">✖</span>
+                      <img src={product.image} alt={product.title} />
+                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                    </td>
+                    <td>{product.price} лв.</td>
+                    <td>
+                      <input type="number" defaultValue={1} min={1} className="quantity-input" />
+                    </td>
+                    <td>{product.price} лв.</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <Link to="/marcet" className="update-cart">Продължи пазаруването</Link>
@@ -57,7 +59,7 @@ export default function Cart() {
           <div className="cart-summary">
             <h3>Обща стойност</h3>
             <p>
-              <strong>Общо</strong> <span>77,20 лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price, 0)} лв.</span>
             </p>
             <p>
               <strong>Доставка</strong>
@@ -87,7 +89,7 @@ export default function Cart() {
           </div>
           <div className="email">
             <span className="icon" />
-            <span>ivailoradulov@gmail.com</span>
+            <span>ivailoradulov05@gmail.com</span>
           </div>
         </div>
       </div>

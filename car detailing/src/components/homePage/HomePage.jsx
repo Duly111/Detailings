@@ -137,7 +137,7 @@ export default function HomePage() {
           </div>
           <div className="email">
             <span />
-            <span>ivailoradulov@gmail.com</span>
+            <span>ivailoradulov05@gmail.com</span>
           </div>
         </div>
       </div>
