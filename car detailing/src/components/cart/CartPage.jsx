@@ -10,11 +10,13 @@ export default function Cart() {
   useEffect(() => {
     const fetchCartProducts = async () => {
       const products = await Promise.all(
-        cartItems.map(async (productId) => {
+        cartItems.map(async (productId,quantity) => {
           const response = await fetch(
             `http://localhost:3030/jsonstore/advanced/articles/details/${productId}`
           );
-          return response.json();
+           
+          const product = await response.json();
+          return { ...product, quantity: 1 };
         })
       );
       setCartProducts(products);
@@ -47,7 +49,12 @@ export default function Cart() {
                     </td>
                     <td>{product.price} лв.</td>
                     <td>
-                      <input type="number" defaultValue={1} min={1} className="quantity-input" />
+                      <input 
+                        type="number"
+                        value={product.quantity}
+                        min={1}
+                        className="quantity-input"
+                        readOnly/>
                     </td>
                     <td>{product.price} лв.</td>
                   </tr>
@@ -59,7 +66,7 @@ export default function Cart() {
           <div className="cart-summary">
             <h3>Обща стойност</h3>
             <p>
-              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price, 0)} лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0)} лв.</span>
             </p>
             <p>
               <strong>Доставка</strong>
@@ -72,7 +79,7 @@ export default function Cart() {
               Промяна на адреса
             </a>
             <p>
-              <strong>Общо</strong> <span>77,20 лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0)} лв.</span>
             </p>
             <button className="checkout">Продължи към Плащане</button>
           </div>

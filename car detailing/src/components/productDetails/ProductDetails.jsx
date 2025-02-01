@@ -4,6 +4,7 @@ import { useCart } from "../cart/CartContext";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
+  const [quantity,setQuantity] = useState(1);
   const { productId } = useParams();
   const navigate = useNavigate();
   const {addToCart} = useCart();
@@ -26,8 +27,22 @@ export default function ProductDetails() {
   }, [productId,navigate]);
 
   const handleAddToCart = () =>{
-    addToCart(productId);
-  }
+    addToCart({
+      id: productId,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      quantity: quantity
+    });
+  };
+
+   const openTab = (event, tabId) =>{
+    document.querySelectorAll(".tab-link").forEach((tab) => tab.classList.remove("active"));
+    event.target.classList.add("active");
+    document.querySelectorAll(".tab-content").forEach((content) => content.classList.remove("active"));
+    document.getElementById(tabId).classList.add("active");
+   };
+  
 
   return (
     <>
@@ -35,6 +50,7 @@ export default function ProductDetails() {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Bug Off</title>
       <link rel="stylesheet" href="styles.css" />
+
       <div className="container">
         <div className="product">
           <img src={product.image} alt="Bug Off Spray" />
@@ -52,7 +68,11 @@ export default function ProductDetails() {
           </div>
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
-            <input type="number" defaultValue={1} min={1} />
+            <input 
+              type="number" 
+              value={quantity} 
+              onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}              
+              min={1} />
             <button onClick={handleAddToCart}>Добавяне в количката</button>
           </div>
         </div>
@@ -62,17 +82,20 @@ export default function ProductDetails() {
         <div className="tabs">
           <button
             className="tab-link active"
-            onclick="openTab(event, 'description')"
+            onClick={(event) => openTab(event,"descriction")}
           >
             Описание
           </button>
           <button
             className="tab-link"
-            onClick="openTab(event, 'additional-info')"
+            onClick={(event) => openTab(event,'additional-info')}
           >
             Допълнителна информация
           </button>
-          <button className="tab-link" onClick="openTab(event, 'reviews')">
+          <button 
+            className="tab-link" 
+            onClick={(event) => openTab(event, 'reviews')}
+          >
             Отзиви (0)
           </button>
         </div>
