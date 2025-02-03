@@ -10,20 +10,23 @@ export default function Cart() {
   useEffect(() => {
     const fetchCartProducts = async () => {
       const products = await Promise.all(
-        cartItems.map(async (productId,quantity) => {
+        cartItems.map(async (item) => {
           const response = await fetch(
-            `http://localhost:3030/jsonstore/advanced/articles/details/${productId}`
+            `http://localhost:3030/jsonstore/advanced/articles/details/${item.productId}`
           );
-           
-          const product = await response.json();
-          return { ...product, quantity: 1 };
+
+          const productData = await response.json() 
+          return {...productData,quantity:item.quantity}
         })
       );
       setCartProducts(products);
     };
 
     fetchCartProducts();
+    
   }, [cartItems]);
+ 
+
 
   return (
     <>
@@ -40,23 +43,23 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cartProducts.map((product) => (
-                  <tr key={product.id}>
+                {cartProducts.map((item) => (
+                  <tr key={item.id}>
                     <td className="product">
                       <span className="remove">✖</span>
-                      <img src={product.image} alt={product.title} />
-                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                      <img src={item.image} alt={item.title} />
+                      <Link to={`/product/${item.id}`}>{item.title}</Link>
                     </td>
-                    <td>{product.price} лв.</td>
+                    <td>{item.price} лв.</td>
                     <td>
                       <input 
                         type="number"
-                        value={product.quantity}
+                        value={item.quantity}
                         min={1}
                         className="quantity-input"
                         readOnly/>
                     </td>
-                    <td>{product.price} лв.</td>
+                    <td>{item.price} лв.</td>
                   </tr>
                 ))}
               </tbody>
@@ -66,7 +69,7 @@ export default function Cart() {
           <div className="cart-summary">
             <h3>Обща стойност</h3>
             <p>
-              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0)} лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0).toFixed(2)} лв.</span>
             </p>
             <p>
               <strong>Доставка</strong>
@@ -79,7 +82,7 @@ export default function Cart() {
               Промяна на адреса
             </a>
             <p>
-              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0)} лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0).toFixed(2)} лв.</span>
             </p>
             <button className="checkout">Продължи към Плащане</button>
           </div>

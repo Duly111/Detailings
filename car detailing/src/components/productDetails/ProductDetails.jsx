@@ -9,6 +9,7 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const {addToCart} = useCart();
 
+
   useEffect(() => {
     (async () => {
       const response = await fetch(
@@ -19,22 +20,27 @@ export default function ProductDetails() {
         navigate("/not-found");
         return;
       }
-
+      
       const result = await response.json();
       setProduct(result);
+      setQuantity(result.quantity);
 
     })();
   }, [productId,navigate]);
 
+  const handleQuantityChange = (event) =>{
+    const newQuantity = parseInt(event.target.value,10);
+    if (!isNaN(newQuantity) && newQuantity >=1){
+      setQuantity(newQuantity)
+    }
+  }
+
   const handleAddToCart = () =>{
-    addToCart({
-      id: productId,
-      title: product.title,
-      price: product.price,
-      image: product.image,
-      quantity: quantity
-    });
+    addToCart(productId,quantity);
   };
+
+
+
 
    const openTab = (event, tabId) =>{
     document.querySelectorAll(".tab-link").forEach((tab) => tab.classList.remove("active"));
@@ -63,16 +69,16 @@ export default function ProductDetails() {
             <label htmlFor="quantity">Количество</label>
             <select id="quantity">
               <option value="0.5l">0,5л</option>
-              <option value="0.750l">0,750л</option>
             </select>
           </div>
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
             <input 
-              type="number" 
-              value={quantity} 
-              onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}              
-              min={1} />
+              type="number"
+              min={1} 
+              value={quantity}
+              onChange={handleQuantityChange}
+            />
             <button onClick={handleAddToCart}>Добавяне в количката</button>
           </div>
         </div>

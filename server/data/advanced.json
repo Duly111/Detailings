@@ -57,17 +57,26 @@
                 "content": "Tire&Wheel Cleaner – истински майстор на многозадачност; Безопасно и ефективно почиства всички видове джанти, гуми, калници и гумени елементи Deiron Man – продукт за ефективно обеззаразяване на джанти и автомобилна боя от метални примеси и прах от накладки Tire Dressing – най-младият от този пакет – ще осигури истинско, приятно покритие и защита на гуми, гумени и пластмасови елементи и автомобилни уплътнения",
                 "image": "https://neshevdetailing.bg/wp-content/uploads/2024/09/460091969_26872474429067191_7291107402341641869_n.jpg",
                 "price": 69.85,
-                "category": "Cleantle"
+                "category": "Cleantle",
+                "quantity": 1
             },
             "fdf00227-084f-48bc-a450-9242a0963f1f": {
                 "_id": "fdf00227-084f-48bc-a450-9242a0963f1f",
-                "title": "Open standard",
-                "content": "An open standard is a standard that is publicly available and has various rights to use associated with it and may also have various properties of how it was designed (e.g. open process). There is no single definition, and interpretations vary with usage."
+                "title": "Shorty 3-pack – Комплект микрофибърни кърпи",
+                "content":"Shorty (3 опаковки) е комплект от 3 многофункционални микрофибърни кърпи  с висок грамаж от 350 г/кв.м. Те могат да се използват за  избърсване на покритието, почистване на интериора и много други детайлни задачи. Късият микрофибър е незаменим помощник за любители и професионалисти. Препоръчваме пране в макс. 40 градуса с помощта на Fabriclean+ Cleantle и сушене в сушилня.",
+                "image":"https://neshevdetailing.bg/wp-content/uploads/2024/10/%D0%95%D0%BA%D1%80%D0%B0%D0%BD%D0%BD%D0%B0-%D1%81%D0%BD%D0%B8%D0%BC%D0%BA%D0%B0_18-10-2024_113546_allegro.pl_.jpeg",
+                "price": 18.00,
+                "category":"Cleantle,аксесоари",
+                "quantity":1
             },
             "8cd30492-3c55-4864-a1a2-7870e1694116": {
                 "_id": "8cd30492-3c55-4864-a1a2-7870e1694116",
-                "title": "Unix",
-                "content": "Unix (trademarked as UNIX) is a family of multitasking, multiuser computer operating systems that derive from the original AT&T Unix, development starting in the 1970s at the Bell Labs research center by Ken Thompson, Dennis Ritchie, and others."
+                "title": "Ben Bow Пистолет без резервоар",
+                "content": "1бр Benbow Класик Без резервоар\n\nВ комплект с допълнителни 2бр фунии и 1бр ротиращ маркуч.\n\nБенбоу пистолет без резервоар Класик – идеален инструмент за почистване на труднодостъпни места по автомобилите. Този тип пистолет предлага удобство, тъй като резервоарът не пречи при почистването. Изключително подходящ за подготовка преди пране на мокети, този инструмент осигурява перфектно обезпесъчаване на мокета, преди да започне същинското пране – като знаем, че подготовката е над 70% от цялата процедура. Добре подготвена повърхност е = на по-лесно пране.\n\nОсвен всичко това, пистолетът може да бъде страхотен помощник за тези, които се занимават с пастиране и полиране. С него, те могат да почистват пада, с който работят, между пасовете.\n\nТЕХНИЧЕСКИ ХАРАКТЕРИСТИКИ:\n\n\t• Препоръчителна работно налягане: 6-8 бара\n\t• Максимално работно налягане: 8bar\n\t• Бърза връзка: 1/4” (включена в комплекта)\n\t• Консумация на въздух: 140L-160L / мин.\n\t• Около 3800-4000 оборота в мин.",
+                "image":"https://neshevdetailing.bg/wp-content/uploads/2025/01/Avtocare-Benbow-classic-1000x1000-1.jpg",
+                "price":80.00,
+                "category":"BenBow,интериор",
+                "quantity":1
             },
             "9d776e93-bc6f-408c-9ab8-8aad7a5cffc4": {
                 "_id": "9d776e93-bc6f-408c-9ab8-8aad7a5cffc4",
