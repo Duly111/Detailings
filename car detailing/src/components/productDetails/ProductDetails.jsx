@@ -42,12 +42,12 @@ export default function ProductDetails() {
 
 
 
-   const openTab = (event, tabId) =>{
+    const openTab = (event, tabId) => {
     document.querySelectorAll(".tab-link").forEach((tab) => tab.classList.remove("active"));
     event.target.classList.add("active");
     document.querySelectorAll(".tab-content").forEach((content) => content.classList.remove("active"));
     document.getElementById(tabId).classList.add("active");
-   };
+  };
   
 
   return (
@@ -65,12 +65,7 @@ export default function ProductDetails() {
           <h1>{product.title}</h1>
           <p className="price">14,00 лв. – 233,00 лв.</p>
           <p className="category">Категории: {product.category}</p>
-          <div className="quantity-select">
-            <label htmlFor="quantity">Количество</label>
-            <select id="quantity">
-              <option value="0.5l">0,5л</option>
-            </select>
-          </div>
+          
           <p className="price-single">{product.price} лв.</p>
           <div className="add-to-cart">
             <input 
@@ -88,7 +83,7 @@ export default function ProductDetails() {
         <div className="tabs">
           <button
             className="tab-link active"
-            onClick={(event) => openTab(event,"descriction")}
+            onClick={(event) => openTab(event, "description")}
           >
             Описание
           </button>
@@ -106,7 +101,7 @@ export default function ProductDetails() {
           </button>
         </div>
         <div id="description" className="tab-content active">
-          <ul>
+          {/* <ul>
             <li>
               <strong>Tire&amp;Wheel Cleaner</strong> – истински майстор на
               многозадачност; Безопасно и ефективно почиства всички видове
@@ -121,7 +116,8 @@ export default function ProductDetails() {
               осигури истинско, приятно покритие и защита на гуми, гумени и
               пластмасови елементи и автомобилни уплътнения
             </li>
-          </ul>
+          </ul> */}
+          <p>{product.content}</p>
         </div>
         <div id="additional-info" className="tab-content">
           <p>Тук ще добавите допълнителна информация за продукта.</p>
