@@ -101,23 +101,7 @@ export default function ProductDetails() {
           </button>
         </div>
         <div id="description" className="tab-content active">
-          {/* <ul>
-            <li>
-              <strong>Tire&amp;Wheel Cleaner</strong> – истински майстор на
-              многозадачност; Безопасно и ефективно почиства всички видове
-              джанти, гуми, калници и гумени елементи
-            </li>
-            <li>
-              <strong>Deiron Man</strong> – продукт за ефективно обеззаразяване
-              на джанти и автомобилна боя от метални примеси и прах от накладки
-            </li>
-            <li>
-              <strong>Tire Dressing</strong> – най-младият от този пакет – ще
-              осигури истинско, приятно покритие и защита на гуми, гумени и
-              пластмасови елементи и автомобилни уплътнения
-            </li>
-          </ul> */}
-          <p>{product.content}</p>
+          <p className="pContent">{product.content}</p>
         </div>
         <div id="additional-info" className="tab-content">
           <p>Тук ще добавите допълнителна информация за продукта.</p>

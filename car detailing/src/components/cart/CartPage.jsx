@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartContext";
 
-
 export default function Cart() {
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCart } = useCart();
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
+    console.log("Cart items updated:", cartItems);
     const fetchCartProducts = async () => {
       const products = await Promise.all(
         cartItems.map(async (item) => {
           const response = await fetch(
             `http://localhost:3030/jsonstore/advanced/articles/details/${item.productId}`
           );
-
-          const productData = await response.json() 
-          return {...productData,quantity:item.quantity}
+          const productData = await response.json();
+          return { ...productData, quantity: item.quantity };
         })
       );
       setCartProducts(products);
     };
 
     fetchCartProducts();
-    
   }, [cartItems]);
- 
 
+  const handelRemove = (productId) => {    
+    removeFromCart(productId);
+  };
 
   return (
     <>
@@ -43,25 +43,32 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cartProducts.map((item) => (
-                  <tr key={item.id}>
-                    <td className="product">
-                      <span className="remove">✖</span>
-                      <img src={item.image} alt={item.title} />
-                      <Link to={`/product/${item.id}`}>{item.title}</Link>
-                    </td>
-                    <td>{item.price} лв.</td>
-                    <td>
-                      <input 
-                        type="number"
-                        value={item.quantity}
-                        min={1}
-                        className="quantity-input"
-                        readOnly/>
-                    </td>
-                    <td>{item.price} лв.</td>
-                  </tr>
-                ))}
+                {cartProducts.map((item) => {
+                  if (!item._id) {
+                    console.error("Product is missing an ID:", item);
+                    return null;
+                  }
+                  return (
+                    <tr key={item._id}>
+                      <td className="product">
+                      <button className="remove" onClick={() => handelRemove(item._id)}>✖</button>
+                        <img src={item.image} alt={item.title} />
+                        <Link to={`/product/${item._id}`}>{item.title}</Link>
+                      </td>
+                      <td>{item.price} лв.</td>
+                      <td>
+                        <input
+                          type="number"
+                          value={item.quantity}
+                          min={1}
+                          className="quantity-input"
+                          readOnly
+                        />
+                      </td>
+                      <td>{(item.price * item.quantity).toFixed(2)} лв.</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <Link to="/marcet" className="update-cart">Продължи пазаруването</Link>
@@ -69,20 +76,20 @@ export default function Cart() {
           <div className="cart-summary">
             <h3>Обща стойност</h3>
             <p>
-              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0).toFixed(2)} лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity, 0).toFixed(2)} лв.</span>
             </p>
             <p>
               <strong>Доставка</strong>
             </p>
             <p>Доставка с Еконт Експрес</p>
             <p>
-              Изпращане до <span className="location">Sliven</span>.
+              Изпращане до <span className="location">Sliven</span>
             </p>
             <a href="#" className="change-address">
               Промяна на адреса
             </a>
             <p>
-              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity,0).toFixed(2)} лв.</span>
+              <strong>Общо</strong> <span>{cartProducts.reduce((acc, product) => acc + product.price * product.quantity, 0).toFixed(2)} лв.</span>
             </p>
             <button className="checkout">Продължи към Плащане</button>
           </div>

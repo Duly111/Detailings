@@ -8,6 +8,7 @@
     border: 1px solid #ddd;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     width: 100%; /* Full width */
+    height: 400px;
 }
 
 .product img {
@@ -193,4 +194,10 @@ ul li {
 
 ul li strong {
     color: #333;
+}
+
+.pContent{
+    font-size: 15px;
+    font-family: Helvetica, sans-serif;
+    padding-right: 40px;
 }
