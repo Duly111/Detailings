@@ -85,10 +85,15 @@
   }
   
   .remove {
-    color: red;
+    color: #1E3A8A;
     cursor: pointer;
     margin-right: 10px;
-    font-size: 18px;
+    font-size: 22px;
+    border: none;
+  }
+
+  .remove:hover{
+    color: #3da0d1;
   }
   
   .update-cart {
@@ -141,7 +146,7 @@
   .checkout {
     width: 100%;
     padding: 10px;
-    background-color: #4dbff6;
+    background-color: #4cbdf6;
     color: white;
     border: none;
     font-size: 1em;
@@ -175,6 +180,11 @@
     font-family: Arial, sans-serif;
     font-size: 18px;
     padding: 10px;
+  }
+
+  .product a:hover{
+    color: #4cbdf6;
+    text-decoration: underline;
   }
   .product p{
     text-decoration: none;

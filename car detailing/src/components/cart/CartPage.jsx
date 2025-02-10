@@ -53,7 +53,7 @@ export default function Cart() {
                       <td className="product">
                       <button className="remove" onClick={() => handelRemove(item._id)}>✖</button>
                         <img src={item.image} alt={item.title} />
-                        <Link to={`/product/${item._id}`}>{item.title}</Link>
+                        <Link to={`/products/${item._id}`} key={item._id}>{item.title}</Link>
                       </td>
                       <td>{item.price} лв.</td>
                       <td>
