@@ -95,6 +95,14 @@ textarea:focus {
     outline: none;
 }
 
+.invalidEmail{
+    color: rgb(244, 35, 35);
+    font-size: 0.875rem; /* Размер на шрифта */
+    margin-top: 0.25rem; /* Разстояние от горния елемент */
+    display: block; 
+
+}
+
 textarea {
     resize: none;
     height: 120px;

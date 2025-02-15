@@ -1,41 +1,77 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PopUpMessage from '../popUpMessage/PopUpMessage';
+import { useFormik } from 'formik';
+import {validate} from './ContactsValidation'
 
 export default function ContactsPage() {
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const name = useRef(null);
-  const email = useRef(null);
-  const message = useRef(null);
-
-  function submitHandler() {
-    setShowPopUp(true); // Показваме PopUp
-
-    // Изчистване на полетата
-    if (name.current) name.current.value = '';
-    if (email.current) email.current.value = '';
-    if (message.current) message.current.value = '';
-  }
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+    validate,
+    onSubmit: (values) => {
+      setShowPopUp(true); // Показва PopUp
+      formik.resetForm(); // Изчиства полетата
+    },
+  });
 
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
       <section className="contactUs">
         <h2 className="contacts-header">Свържи се с нас</h2>
         <div className="inputs">
           <div>
-            <input className="inp" type="text" placeholder="Име" ref={name} />
+            <input
+              className="inp"
+              type="text"
+              placeholder="Име"
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            {formik.touched.name && formik.errors.name ? (
+              <div className='invalidEmail'>
+                <span>{formik.errors.name}</span>
+              </div>   
+            ) : null}
           </div>
           <div>
-            <input className="inp" type="email" placeholder="Имейл" ref={email} />
+            <input
+              className="inp"
+              type="email"
+              placeholder="Имейл"
+              name="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <div className='invalidEmail'>
+                <span>{formik.errors.email}</span>
+              </div>   
+            ) : null}
           </div>
           <div>
-            <textarea rows={4} placeholder="Съобщение" defaultValue={""} ref={message} />
+            <textarea
+              rows={4}
+              placeholder="Съобщение"
+              name="message"
+              onChange={formik.handleChange}
+              value={formik.values.message}
+            />
+            {formik.touched.message && formik.errors.message ? (
+              <div className='invalidEmail'>
+                <span>{formik.errors.message}</span>
+              </div>   
+            ) : null}
           </div>
-          <button className="sendBtn" onClick={submitHandler}>Изпращане</button>
-          {/* Предаваме функция за затваряне на PopUpMessage */}
+          <button className="sendBtn" type="submit">Изпращане</button>
           {showPopUp && <PopUpMessage close={() => setShowPopUp(false)} />}
         </div>
       </section>
-    </>
+    </form>
   );
 }

@@ -96,16 +96,17 @@ nav a:hover {
 .find-guide {
     padding: 15px 30px;
     font-size: 1em;
-    background-color: #4478FD; /* Примерен цвят за бутон */
+    background-color: #0242FD; /* Примерен цвят за бутон */
     color: #fff;
     border: none;
     border-radius: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 }
 
 .find-guide:hover {
-    background-color: #0242FD; /* Промяна на цвета при задържане */
+    background-color: #1E3A8A; /* Промяна на цвета при задържане */
 }
 
 /* Parts of our marcet */

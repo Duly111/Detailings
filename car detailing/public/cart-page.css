@@ -85,7 +85,7 @@
   }
   
   .remove {
-    color: #1E3A8A;
+    color: #3da0d1;
     cursor: pointer;
     margin-right: 10px;
     font-size: 22px;
@@ -93,7 +93,7 @@
   }
 
   .remove:hover{
-    color: #3da0d1;
+    color: #1E3A8A;
   }
   
   .update-cart {
