@@ -14,14 +14,14 @@ export default function ContactsPage() {
     },
     validate,
     onSubmit: (values) => {
-      setShowPopUp(true); // Показва PopUp
-      formik.resetForm(); // Изчиства полетата
+      setShowPopUp(true);
+      formik.resetForm();
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <section className="contactUs">
+      <section className="contactUs" >
         <h2 className="contacts-header">Свържи се с нас</h2>
         <div className="inputs">
           <div>
@@ -30,6 +30,7 @@ export default function ContactsPage() {
               type="text"
               placeholder="Име"
               name="name"
+
               onChange={formik.handleChange}
               value={formik.values.name}
             />
@@ -72,6 +73,6 @@ export default function ContactsPage() {
           {showPopUp && <PopUpMessage close={() => setShowPopUp(false)} />}
         </div>
       </section>
-    </form>
+      </form>
   );
 }

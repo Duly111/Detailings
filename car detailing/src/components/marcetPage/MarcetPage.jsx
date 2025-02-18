@@ -1,32 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {useProductFilter} from './SearcheBarFuntionality'
 
 export default function MarcetPage() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3030/jsonstore/advanced/articles/details"
-        );
-        const result = await response.json();
-
-        const productsArray = Object.values(result);
-
-        setProducts(productsArray);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    })();
-  }, []);
-
-  const generateRandomNumber = () => {
-    const min = 1;
-    const max = 100;
-    const randomNumber = Math.random() * (max - min + 1) + min;
-    return randomNumber.toFixed(2);
-  };
+  const {inputHandler,products,filteredData,inputText} = useProductFilter()
+  
 
   return (
     <>
@@ -82,7 +60,12 @@ export default function MarcetPage() {
         {/* Product Section */}
         <section className="product-section">
           <div className="search-bar">
-            <input type="text" placeholder="Търси Продукти" />
+            <input 
+              type="text" 
+              placeholder="Търси Продукти" 
+              onChange={inputHandler}
+              value={inputText} 
+              />
             <select>
               <option value="">Всички Категории</option>
             </select>
@@ -91,7 +74,7 @@ export default function MarcetPage() {
             <p>Показване на 1-9 от {products.length} резултата</p>
           </div>
           <div className="product-list">
-            {products.map((product) => (
+            {filteredData.map((product) => (
               <Link to={`/products/${product._id}`} key={product._id}>
                 <div className="product-item" >
                   <img src={product.image} alt="Belt Brush" />
@@ -124,3 +107,4 @@ export default function MarcetPage() {
     </>
   );
 }
+
