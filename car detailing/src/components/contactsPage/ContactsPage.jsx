@@ -1,23 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PopUpMessage from '../popUpMessage/PopUpMessage';
-import { useFormik } from 'formik';
-import {validate} from './ContactsValidation'
+import contactsValidation from './ContactsValidation'
 
 export default function ContactsPage() {
-  const [showPopUp, setShowPopUp] = useState(false);
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
-    validate,
-    onSubmit: (values) => {
-      setShowPopUp(true);
-      formik.resetForm();
-    },
-  });
+  const {showPopUp,formik,setShowPopUp} = contactsValidation()
 
   return (
     <form onSubmit={formik.handleSubmit}>

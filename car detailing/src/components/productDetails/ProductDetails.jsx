@@ -107,7 +107,69 @@ export default function ProductDetails() {
           <p>Тук ще добавите допълнителна информация за продукта.</p>
         </div>
         <div id="reviews" className="tab-content">
-          <p>Все още няма отзиви за този продукт.</p>
+
+          <form className="form-comments">
+            {/* Customer review */}
+
+            <div className="comments">
+              <div class="avatar">C</div>
+                <div class="message-content">
+                  <div class="message-header">
+                    <strong>Client</strong>
+                    <span class="time">13:00 Jul 24</span>
+                  </div>
+              <p>Would you please update this image?Here’s the new one:</p>
+              <a href="#">Jon+Gills+-_new+profile+pic.jpg</a>
+            </div>
+              
+            </div>
+
+            {/* input section */}
+            <div className="comments-inputs">
+            <div className="text-section">
+              <p>Вашият имейл адрес няма да бъде публикуван. Задължителните полета са отбелязани с 
+                <span className="star">*</span>
+              </p>
+            </div>
+
+            <div className="text-section">
+                <p>Вашият отзив 
+                  <span className="star">*</span>
+                </p>
+              </div>
+              
+              <textarea name="" className="comment-text"></textarea>
+              
+              <div className="text-section">
+                <p>Име
+                  <span className="star">*</span>
+                </p>
+              </div>
+
+              <input
+              className="name-text" 
+              type="text" 
+              name="text"
+              />
+              
+              <div className="text-section">
+                <p>Ймейл
+                  <span className="star">*</span>
+                </p>
+              </div>
+              
+              
+              <input
+                className="email-text"
+                type="email"
+                placeholder="Имейл"
+                name="email"
+              />
+
+              
+              <button className="btn-send">Изпращане</button>
+            </div>
+          </form>
         </div>
       </div>
     </>

@@ -5,7 +5,6 @@ import {useProductFilter} from './SearcheBarFuntionality'
 export default function MarcetPage() {
   const {inputHandler,products,filteredData,inputText} = useProductFilter()
   
-
   return (
     <>
       <section className="guide-marcet">

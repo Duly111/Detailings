@@ -197,7 +197,125 @@ ul li strong {
 }
 
 .pContent{
-    font-size: 15px;
+    width: 60%;
+    font-size: 16px;
     font-family: Helvetica, sans-serif;
     padding-right: 40px;
 }
+
+/* Comments section */
+
+.form-comments{
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0 50px 0;
+    justify-content: center;
+    
+}
+
+.comments{
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    background-color: #f7f7f8;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+}
+
+.message-content {
+    max-width: 280px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.time {
+    font-size: 12px;
+    color: gray;
+}
+
+a {
+    color: #005eff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* input section */
+.comments-inputs{
+    width: 50%;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-section{
+    display: flex;
+    flex-direction: row;
+   
+}
+.text-section p{
+    font-size: 17px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: Helvetica, sans-serif;
+    margin: 10px 0;
+    width: 80%;
+}
+.star{
+    color: red;
+}
+
+.name-text, .email-text{
+    line-height: 18px;
+    width: 80%;
+    padding: 10px;
+    border: 0.5px solid #959494;
+}
+
+.comment-text{
+    display: flex;
+    justify-content: center;
+    border: 0.5px solid #959494;
+    border-radius: 0;
+    height: 100px;
+    width: 80%;
+}
+.comment-text:focus{
+    border: 2px solid #000000;
+}
+
+.btn-send{
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #181719;
+    color: white;
+    margin: 10px 0;
+}
+
+.btn-send:hover{
+    background-color: #3A3A3A;
+}
+ 
