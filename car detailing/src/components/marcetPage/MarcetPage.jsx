@@ -1,10 +1,47 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import {useProductFilter} from './SearcheBarFuntionality'
+import { Link,useLocation,useNavigate } from "react-router-dom";
+import {useEffect,useState} from "react"
+import { useProductFilter } from "./SearcheBarFuntionality";
 
 export default function MarcetPage() {
-  const {inputHandler,products,filteredData,inputText} = useProductFilter()
-  
+  const { inputHandler, filteredProducts, inputText, filterByCategory } = useProductFilter();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get("category");
+
+    if (categoryParam) {
+      const categories = categoryParam.split(",");
+      setSelectedCategories(categories);
+      filterByCategory(categoryParam); 
+    } else {
+      setSelectedCategories([]);
+      filterByCategory(""); 
+    }
+  }, [location.search]);
+
+ 
+
+  const handleCategoryClick = (event, category) => {
+    const checked = event.target.checked;
+    const params = new URLSearchParams(location.search);
+
+    let updatedCategories = [...selectedCategories];
+
+    if (checked) {
+      updatedCategories.push(category);
+    } else {
+      updatedCategories = updatedCategories.filter((c) => c !== category);
+    }
+
+    setSelectedCategories(updatedCategories);
+    params.set("category", updatedCategories.join(","));
+
+    navigate(`/marcet?${params.toString()}`);
+  };
+
   return (
     <>
       <section className="guide-marcet">
@@ -18,40 +55,34 @@ export default function MarcetPage() {
         <div className="filter-section">
           <h3>Ценови Диапазон</h3>
           <div className="price-range">
-            <input
-              type="range"
-              min={0}
-              max={100}
-              defaultValue={0}
-              className="slider"
-            />
+            <input type="range" min={0} max={100} defaultValue={0} className="slider" />
             <div className="price-label">
               <span>лв.0 - лв.0</span>
-              <button className="clear-filter">Премахни Филтър</button>
+              <button className="clear-filter" onClick={() => navigate("/marcet")}>Премахни Филтър</button>
             </div>
           </div>
           <h3>Категории</h3>
           <ul className="categories">
             <li>
-              <input type="checkbox" /> аксесоари
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"аксесоари")} /> аксесоари
             </li>
             <li>
-              <input type="checkbox" /> керамични покрития, вакси и сийланти
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"керамични покрития, вакси и сийланти")} /> керамични покрития, вакси и сийланти
             </li>
             <li>
-              <input type="checkbox" /> детайлинг оборудване
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"детайлинг оборудване")} /> детайлинг оборудване
             </li>
             <li>
-              <input type="checkbox" /> промо пакет
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"промо пакет")} /> промо пакет
             </li>
             <li>
-              <input type="checkbox" /> интериор
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e, "интериор")} /> интериор
             </li>
             <li>
-              <input type="checkbox" /> екстериор
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"екстериор")} /> екстериор
             </li>
             <li>
-              <input type="checkbox" /> полиращи пасти и падове
+              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"полиращи пасти и падове")} /> полиращи пасти и падове
             </li>
           </ul>
         </div>
@@ -64,19 +95,19 @@ export default function MarcetPage() {
               placeholder="Търси Продукти" 
               onChange={inputHandler}
               value={inputText} 
-              />
+            />
             <select>
               <option value="">Всички Категории</option>
             </select>
           </div>
           <div className="results-info">
-            <p>Показване на 1-9 от {products.length} резултата</p>
+            <p>Показване на 1-9 от {filteredProducts.length} резултата</p>
           </div>
           <div className="product-list">
-            {filteredData.map((product) => (
+            {filteredProducts.map((product) => (
               <Link to={`/products/${product._id}`} key={product._id}>
-                <div className="product-item" >
-                  <img src={product.image} alt="Belt Brush" />
+                <div className="product-item">
+                  <img src={product.image} alt={product.title} />
                   <p className="category">{product.category}</p>
                   <h4>{product.title}</h4>
                   <div className="rating">☆☆☆☆☆ (0)</div>
@@ -106,4 +137,3 @@ export default function MarcetPage() {
     </>
   );
 }
-

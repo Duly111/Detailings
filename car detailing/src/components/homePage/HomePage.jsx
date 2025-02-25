@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
+  const handleFilterClick = (event, category) => {
+    event.preventDefault();
+    navigate(`/marcet?category=${category}`);
+  }
+
   return (
     <>
       <section className="guide">
@@ -30,7 +38,8 @@ export default function HomePage() {
           }}
         >
           <div>
-            <a className="interior" href="">
+            <a className="interior" href="" 
+              onClick={(e) => handleFilterClick(e,"интериор")}>
               Интериор
             </a>
           </div>
@@ -84,7 +93,9 @@ export default function HomePage() {
           }}
         >
           <div>
-            <a className="interior" href="">
+            <a className="interior" href=""
+              onClick={(e) => handleFilterClick(e,"аксесоари")}
+            >
               Аксесоари
             </a>
           </div>

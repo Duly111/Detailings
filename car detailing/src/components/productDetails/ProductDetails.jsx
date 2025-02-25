@@ -112,11 +112,11 @@ export default function ProductDetails() {
             {/* Customer review */}
 
             <div className="comments">
-              <div class="avatar">C</div>
-                <div class="message-content">
-                  <div class="message-header">
+              <div className="avatar">C</div>
+                <div className="message-content">
+                  <div className="message-header">
                     <strong>Client</strong>
-                    <span class="time">13:00 Jul 24</span>
+                    <span className="time">13:00 Jul 24</span>
                   </div>
               <p>Would you please update this image?Here’s the new one:</p>
               <a href="#">Jon+Gills+-_new+profile+pic.jpg</a>

@@ -1,21 +1,8 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
-export default function contactsValidation(){
+export default function contactsValidation() {
     const [showPopUp, setShowPopUp] = useState(false);
-
-    const formik = useFormik({
-        initialValues: {
-        name: '',
-        email: '',
-        message: '',
-        },
-        validate,
-        onSubmit: (values) => {
-        setShowPopUp(true);
-        formik.resetForm();
-        },
-    });
 
     const validate = (values) => {
         const errors = {};
@@ -41,6 +28,18 @@ export default function contactsValidation(){
         return errors;
     };
 
-    return {showPopUp,formik,setShowPopUp}
-}
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            message: '',
+        },
+        validate, // validate се използва тук
+        onSubmit: (values) => {
+            setShowPopUp(true);
+            formik.resetForm();
+        },
+    });
 
+    return { showPopUp, formik, setShowPopUp };
+}
