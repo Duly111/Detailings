@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../cart/CartContext";
+import Comments from './Coments';
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
@@ -8,6 +9,13 @@ export default function ProductDetails() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const {addToCart} = useCart();
+  const{
+    handleSubmit,
+    handleInputChanges,
+    submittedReviews,
+    name,
+    email,
+    review} = Comments();
 
 
   useEffect(() => {
@@ -108,20 +116,22 @@ export default function ProductDetails() {
         </div>
         <div id="reviews" className="tab-content">
 
-          <form className="form-comments">
+          <form className="form-comments" onSubmit={handleSubmit}>
             {/* Customer review */}
 
             <div className="comments">
-              <div className="avatar">C</div>
-                <div className="message-content">
-                  <div className="message-header">
-                    <strong>Client</strong>
-                    <span className="time">13:00 Jul 24</span>
+              {submittedReviews.map((review, index) => (
+                <div key={index}> {/* Родителски елемент */}
+                  <div className="avatar">{review.name.charAt(0)}</div>
+                  <div className="message-content">
+                    <div className="message-header">
+                      <strong>{review.name}</strong>
+                      <span className="time">{review.timestamp}</span>
+                    </div>
+                    <p>{review.review}</p>
                   </div>
-              <p>Would you please update this image?Here’s the new one:</p>
-              <a href="#">Jon+Gills+-_new+profile+pic.jpg</a>
-            </div>
-              
+                </div>
+              ))}
             </div>
 
             {/* input section */}
@@ -138,7 +148,13 @@ export default function ProductDetails() {
                 </p>
               </div>
               
-              <textarea name="" className="comment-text"></textarea>
+              <textarea 
+                className="comment-text"
+                name="review"
+                value={review}
+                onChange={handleInputChanges}
+                required
+              />
               
               <div className="text-section">
                 <p>Име
@@ -147,9 +163,12 @@ export default function ProductDetails() {
               </div>
 
               <input
-              className="name-text" 
-              type="text" 
-              name="text"
+               className="name-text"
+               type="text"
+               name="name"
+               value={name}
+               onChange={handleInputChanges}
+               required
               />
               
               <div className="text-section">
@@ -164,6 +183,9 @@ export default function ProductDetails() {
                 type="email"
                 placeholder="Имейл"
                 name="email"
+                value={email}
+                onChange={handleInputChanges}
+                required
               />
 
               
