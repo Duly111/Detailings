@@ -34,7 +34,7 @@ export default function contactsValidation() {
             email: '',
             message: '',
         },
-        validate, // validate се използва тук
+        validate,
         onSubmit: (values) => {
             setShowPopUp(true);
             formik.resetForm();

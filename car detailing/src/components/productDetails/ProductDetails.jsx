@@ -105,7 +105,7 @@ export default function ProductDetails() {
             className="tab-link" 
             onClick={(event) => openTab(event, 'reviews')}
           >
-            Отзиви (0)
+            Отзиви ({submittedReviews.length})
           </button>
         </div>
         <div id="description" className="tab-content active">
@@ -119,16 +119,18 @@ export default function ProductDetails() {
           <form className="form-comments" onSubmit={handleSubmit}>
             {/* Customer review */}
 
-            <div className="comments">
+            <div className="commentsContainer">
               {submittedReviews.map((review, index) => (
-                <div key={index}> {/* Родителски елемент */}
-                  <div className="avatar">{review.name.charAt(0)}</div>
-                  <div className="message-content">
-                    <div className="message-header">
-                      <strong>{review.name}</strong>
-                      <span className="time">{review.timestamp}</span>
+                <div className="comments">
+                  <div key={index}> {/* Родителски елемент */}
+                    <div className="avatar">{review.name.charAt(0)}</div>
+                    <div className="message-content">
+                      <div className="message-header">
+                        <strong>{review.name}</strong>
+                        <span className="time">{review.timestamp}</span>
+                      </div>
+                      <p>{review.review}</p>
                     </div>
-                    <p>{review.review}</p>
                   </div>
                 </div>
               ))}
@@ -197,3 +199,4 @@ export default function ProductDetails() {
     </>
   );
 }
+

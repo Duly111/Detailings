@@ -16,7 +16,7 @@ export default function ContactsPage() {
               type="text"
               placeholder="Име"
               name="name"
-
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.name}
             />
@@ -33,6 +33,7 @@ export default function ContactsPage() {
               placeholder="Имейл"
               name="email"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
             />
             {formik.touched.email && formik.errors.email ? (
@@ -47,6 +48,7 @@ export default function ContactsPage() {
               placeholder="Съобщение"
               name="message"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.message}
             />
             {formik.touched.message && formik.errors.message ? (

@@ -205,17 +205,21 @@ ul li strong {
 
 /* Comments section */
 
-.form-comments{
+/* .form-comments{
     display: flex;
     flex-direction: row;
     padding: 50px 0 50px 0;
     justify-content: center;
     
 }
-
-.comments{
+.commentsContainer{
     width: 50%;
     display: flex;
+    position: sticky;
+    flex: wrap;
+}
+
+.comments{
     align-items: flex-start;
     background-color: #f7f7f8;
     margin: 20px;
@@ -252,6 +256,78 @@ ul li strong {
 .time {
     font-size: 12px;
     color: gray;
+}
+
+a {
+    color: #005eff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+} */
+
+.form-comments {
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0 50px 0;
+    justify-content: center;
+}
+
+.commentsContainer {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Два елемента на ред */
+    gap: 20px; /* Разстояние между елементите */
+    overflow-y: auto; /* Добавяне на скролер при необходимост */
+    max-height: 500px; /* Максимална височина на контейнера */
+}
+
+.comments {
+    display: flex;
+    align-items: flex-start;
+    background-color: #f7f7f8;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Предотвратява излизането на текста извън контейнера */
+    word-wrap: break-word; /* Позволява на текста да се прехвърля на нов ред */
+    max-width: 100%; /* Ограничава максималната ширина на контейнера */
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+}
+
+.message-content {
+    max-width: 280px;
+    word-wrap: break-word; /* Позволява на текста да се прехвърля на нов ред */
+    overflow-wrap: break-word; /* Подобно на word-wrap, но с по-добра поддръжка */
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.time {
+    font-size: 12px;
+    padding: 8px;
+    color: gray;
+    white-space: nowrap;
 }
 
 a {
