@@ -122,7 +122,7 @@ export default function ProductDetails() {
             <div className="commentsContainer">
               {submittedReviews.map((review, index) => (
                 <div className="comments">
-                  <div key={index}> {/* Родителски елемент */}
+                  <div key={index}> 
                     <div className="avatar">{review.name.charAt(0)}</div>
                     <div className="message-content">
                       <div className="message-header">

@@ -205,68 +205,6 @@ ul li strong {
 
 /* Comments section */
 
-/* .form-comments{
-    display: flex;
-    flex-direction: row;
-    padding: 50px 0 50px 0;
-    justify-content: center;
-    
-}
-.commentsContainer{
-    width: 50%;
-    display: flex;
-    position: sticky;
-    flex: wrap;
-}
-
-.comments{
-    align-items: flex-start;
-    background-color: #f7f7f8;
-    margin: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    font-family: Arial, sans-serif;
-}
-
-.avatar {
-    width: 35px;
-    height: 35px;
-    background-color: #ccc;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 16px;
-    color: white;
-    margin-right: 10px;
-}
-
-.message-content {
-    max-width: 280px;
-}
-
-.message-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.time {
-    font-size: 12px;
-    color: gray;
-}
-
-a {
-    color: #005eff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-} */
-
 .form-comments {
     display: flex;
     flex-direction: row;
@@ -277,10 +215,10 @@ a:hover {
 .commentsContainer {
     width: 50%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Два елемента на ред */
-    gap: 20px; /* Разстояние между елементите */
-    overflow-y: auto; /* Добавяне на скролер при необходимост */
-    max-height: 500px; /* Максимална височина на контейнера */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    overflow-y: auto; 
+    max-height: 500px; 
 }
 
 .comments {
@@ -290,9 +228,9 @@ a:hover {
     padding: 10px;
     border-radius: 8px;
     font-family: Arial, sans-serif;
-    overflow: hidden; /* Предотвратява излизането на текста извън контейнера */
-    word-wrap: break-word; /* Позволява на текста да се прехвърля на нов ред */
-    max-width: 100%; /* Ограничава максималната ширина на контейнера */
+    overflow: hidden; 
+    word-wrap: break-word; 
+    max-width: 100%;
 }
 
 .avatar {
@@ -311,8 +249,8 @@ a:hover {
 
 .message-content {
     max-width: 280px;
-    word-wrap: break-word; /* Позволява на текста да се прехвърля на нов ред */
-    overflow-wrap: break-word; /* Подобно на word-wrap, но с по-добра поддръжка */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
 }
 
 .message-header {
@@ -354,7 +292,6 @@ a:hover {
 }
 .text-section p{
     font-size: 17px;
-    /* font-family: Arial, Helvetica, sans-serif; */
     font-family: Helvetica, sans-serif;
     margin: 10px 0;
     width: 80%;

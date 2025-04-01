@@ -6,7 +6,6 @@ export default function Comments() {
     const [review, setReview] = useState("");
     const [submittedReviews, setSubmittedReviews] = useState([]);
 
-    // Зареждане на запазените коментари от localStorage при първоначално зареждане
     useEffect(() => {
         const savedReviews = localStorage.getItem("submittedReviews");
         if (savedReviews) {
@@ -14,7 +13,6 @@ export default function Comments() {
         }
     }, []);
 
-    // Запазване на коментарите в localStorage при всяка промяна
     useEffect(() => {
         localStorage.setItem("submittedReviews", JSON.stringify(submittedReviews));
     }, [submittedReviews]);
@@ -38,7 +36,7 @@ export default function Comments() {
             name,
             email,
             review,
-            timestamp: new Date().toLocaleString(), // Добавяне на текущо време
+            timestamp: new Date().toLocaleString(),
         };
 
         setSubmittedReviews([...submittedReviews, newReview]);

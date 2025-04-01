@@ -1,3 +1,31 @@
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.abv.bg',
+    port: 587,
+    secure: false, // true за порт 465
+    auth: {
+        user: 'ivanchotestemail@abv.bg', // ПЪЛЕН имейл (с @abv.bg)
+        pass: 'Iv@ilo111' // Без интервали в началото/края
+    },
+    tls: {
+        rejectUnauthorized: false
+    },
+    logger: true, // Добавете за debug
+    debug: true   // Ще покаже подробни логи
+});
+
+testTransporter.verify((error) => {
+    if (error) {
+        console.error('ABV SMTP грешка:', error);
+    } else {
+        console.log('ABV SMTP работи нормално!');
+    }
+});
+
+
+
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('fs'), require('crypto')) :
     typeof define === 'function' && define.amd ? define(['http', 'fs', 'crypto'], factory) :
@@ -420,7 +448,57 @@
     userService.post('register', onRegister);
     userService.post('login', onLogin);
     userService.get('logout', onLogout);
+    userService.post('subscribe',onSubscribe);
 
+
+
+    async function onSubscribe(context, tokens, query, body) {
+        try {
+            // Валидация
+            if (!body || typeof body !== 'object') {
+                throw new RequestError('Липсват данни');
+            }
+        
+            const { name, email, message } = body;
+        
+            // Подробна валидация
+            if (!name?.trim()) {
+                throw new RequestError('Липсва име');
+            }
+        
+            if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                throw new RequestError('Невалиден имейл');
+            }
+        
+            if (!message?.trim()) {
+                throw new RequestError('Липсва съобщение');
+            }
+    
+            // Изпращане на имейли
+            await transporter.sendMail({
+                from: process.env.EMAIL_USER || 'ivailotestemail@gmail.com',
+                to: process.env.ADMIN_EMAIL || 'ivailotestemail@gmail.com',
+                subject: `Ново съобщение от ${name}`,
+                text: `Име: ${name}\nИмейл: ${email}\nСъобщение: ${message}`
+            });
+    
+            return {
+                success: true,
+                message: 'Съобщението е изпратено успешно!',
+                data: { name, email, timeStamp: new Date().toISOString() }
+            };
+    
+        } catch (error) {
+            console.error('Сървърна грешка:', error);
+            
+            // Връщаме стандартизиран формат за грешки
+            if (error instanceof ServiceError) {
+                throw error; // Вече форматирана грешка
+            } else {
+                throw new RequestError(error.message);
+            }
+        }
+    }
 
     function getSelf(context, tokens, query, body) {
         if (context.user) {
