@@ -6,23 +6,26 @@ export default function useContactsValidation() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
 
+    // 1. Оптимизирана валидационна функция
     const validate = (values) => {
         const errors = {};
         
         if (!values.email) {
             errors.email = 'Моля, въведете валиден имейл адрес.';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-            errors.email = 'Невалиден имейл адрес';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/i.test(values.email)) {
+            errors.email = 'Невалиден имейл адрес формат';
         }
         
-        if(!values.name) {
+        if (!values.name?.trim()) {
             errors.name = "Моля, въведете вашето име.";
-        } else if (values.name.length < 3) {
+        } else if (values.name.trim().length < 3) {
             errors.name = 'Името трябва да е поне 3 символа.';
         }
         
-        if (!values.message) {
+        if (!values.message?.trim()) {
             errors.message = "Моля, въведете вашето съобщение";
+        } else if (values.message.trim().length < 10) {
+            errors.message = "Съобщението трябва да е поне 10 символа";
         }
           
         return errors;
@@ -40,35 +43,33 @@ export default function useContactsValidation() {
             setSubmitError(null);
 
             try {
-                // 1. Подготвяме данните
-                const formData = {
-                    name: values.name.trim(),
-                    email: values.email.trim(),
-                    message: values.message.trim()
-                };
-        
-                // 2. Изпращане към сървъра
+                // 2. Оптимизирано изпращане
                 const response = await fetch('http://localhost:3030/users/subscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        name: values.name.trim(),
+                        email: values.email.trim(),
+                        message: values.message.trim()
+                    }),
                 });
         
-                // 3. Обработка на отговора
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Грешка ${response.status}`);
-                }
-        
                 const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                }
+
                 setShowPopUp(true);
                 resetForm();
             } catch (error) {
-                console.error('Грешка при изпращане:', error);
-                setSubmitError(error.message || 'Грешка при изпращане на съобщението');
+                console.error('Submission error:', error);
+                setSubmitError(
+                    error.message || 
+                    'Възникна грешка при изпращане. Моля, опитайте по-късно.'
+                );
             } finally {
                 setIsSubmitting(false);
             }
@@ -80,6 +81,7 @@ export default function useContactsValidation() {
         formik, 
         setShowPopUp,
         isSubmitting,
-        submitError 
+        submitError,
+        resetError: () => setSubmitError(null) // Допълнителен хелпер
     };
 }

@@ -1,29 +1,15 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.abv.bg',
+    host: "smtp-relay.brevo.com",
     port: 587,
     secure: false, // true за порт 465
     auth: {
-        user: 'ivanchotestemail@abv.bg', // ПЪЛЕН имейл (с @abv.bg)
-        pass: 'Iv@ilo111' // Без интервали в началото/края
+      user: "8973af001@smtp-brevo.com", // Имейлът в Brevo
+      pass: "WkR9v8Lc1EanGxpr" // Генерира се в Brevo SMTP настройки
     },
-    tls: {
-        rejectUnauthorized: false
-    },
-    logger: true, // Добавете за debug
-    debug: true   // Ще покаже подробни логи
-});
-
-testTransporter.verify((error) => {
-    if (error) {
-        console.error('ABV SMTP грешка:', error);
-    } else {
-        console.log('ABV SMTP работи нормално!');
-    }
-});
-
-
+    tls: { rejectUnauthorized: false }
+  });
 
 
 (function (global, factory) {
@@ -450,55 +436,54 @@ testTransporter.verify((error) => {
     userService.get('logout', onLogout);
     userService.post('subscribe',onSubscribe);
 
-
-
+  
+  
     async function onSubscribe(context, tokens, query, body) {
         try {
-            // Валидация
-            if (!body || typeof body !== 'object') {
-                throw new RequestError('Липсват данни');
-            }
-        
-            const { name, email, message } = body;
-        
-            // Подробна валидация
-            if (!name?.trim()) {
-                throw new RequestError('Липсва име');
-            }
-        
-            if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                throw new RequestError('Невалиден имейл');
-            }
-        
-            if (!message?.trim()) {
-                throw new RequestError('Липсва съобщение');
-            }
-    
-            // Изпращане на имейли
-            await transporter.sendMail({
-                from: process.env.EMAIL_USER || 'ivailotestemail@gmail.com',
-                to: process.env.ADMIN_EMAIL || 'ivailotestemail@gmail.com',
-                subject: `Ново съобщение от ${name}`,
-                text: `Име: ${name}\nИмейл: ${email}\nСъобщение: ${message}`
-            });
-    
-            return {
-                success: true,
-                message: 'Съобщението е изпратено успешно!',
-                data: { name, email, timeStamp: new Date().toISOString() }
-            };
-    
+          // Валидация
+          if (!body || typeof body !== 'object') {
+            throw new RequestError('Липсват данни');
+          }
+      
+          const { name, email, message } = body;
+      
+          if (!name?.trim()) {
+            throw new RequestError('Липсва име');
+          }
+      
+          if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            throw new RequestError('Невалиден имейл');
+          }
+      
+          if (!message?.trim()) {
+            throw new RequestError('Липсва съобщение');
+          }
+      
+          // Изпращане на имейл
+          await transporter.sendMail({
+            from: 'ivailoradulov05@gmail.com', // Трябва да съвпада с auth.user
+            to: email,
+            subject: `Ново съобщение от NeshevDetailing`,
+            text: `Работим но вашия казус за най-бързо отстраняване`,
+          });
+      
+      
+          return {
+            success: true,
+            message: 'Съобщението е изпратено успешно!',
+            data: { name, email, timeStamp: new Date().toISOString() }
+          };
+      
         } catch (error) {
-            console.error('Сървърна грешка:', error);
-            
-            // Връщаме стандартизиран формат за грешки
-            if (error instanceof ServiceError) {
-                throw error; // Вече форматирана грешка
-            } else {
-                throw new RequestError(error.message);
-            }
+          console.error('Грешка в onSubscribe:', error);
+          
+          if (error instanceof RequestError || error instanceof ServiceError) {
+            throw error;
+          } else {
+            throw new ServiceError(`Грешка при изпращане: ${error.message}`);
+          }
         }
-    }
+      }
 
     function getSelf(context, tokens, query, body) {
         if (context.user) {
