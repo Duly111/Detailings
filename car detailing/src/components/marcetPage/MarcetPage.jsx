@@ -13,11 +13,6 @@ export default function MarcetPage() {
     setSliderValue(e.target.value);
   }
 
-  function clearFunction (){
-    setSliderValue(0);
-    
-  }
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const categoryParam = params.get("category");
@@ -68,31 +63,64 @@ export default function MarcetPage() {
             <input type="range" min={0} max={1000} step={10} value={sliderValue} onChange={handleSliderValue}  className="slider" />
             <div className="price-label">
               <span>лв.0 - лв.{sliderValue}</span>
-              <button className="clear-filter" onClick={() => {navigate("/marcet"),setSliderValue(0)}}>Премахни Филтър</button>
+              <button className="clear-filter" onClick={() => {
+                navigate("/marcet");
+                setSliderValue(0);
+                setSelectedCategories([]);
+              }}
+              >Премахни Филтър</button>
             </div>
           </div>
           <h3>Категории</h3>
           <ul className="categories">
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"аксесоари")} /> аксесоари
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"аксесоари")} 
+                checked = {selectedCategories.includes("аксесоари")}
+              /> аксесоари
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"керамични покрития, вакси и сийланти")} /> керамични покрития, вакси и сийланти
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"керамични покрития, вакси и сийланти")} 
+                checked = {selectedCategories.includes("керамични покрития, вакси и сийланти")}
+              /> керамични покрития, вакси и сийланти
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"детайлинг оборудване")} /> детайлинг оборудване
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"детайлинг оборудване")} 
+                checked = {selectedCategories.includes("детайлинг оборудване")}
+              /> детайлинг оборудване
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"промо пакет")} /> промо пакет
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"промо пакет")} 
+                checked = {selectedCategories.includes("промо пакет")}
+              /> промо пакет
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e, "интериор")} /> интериор
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e, "интериор")} 
+                checked = {selectedCategories.includes("интериор")}
+              /> интериор
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"екстериор")} /> екстериор
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"екстериор")} 
+                checked = {selectedCategories.includes("екстериор")}
+                /> екстериор
             </li>
             <li>
-              <input type="checkbox" onChange={(e) => handleCategoryClick(e,"полиращи пасти и падове")} /> полиращи пасти и падове
+              <input 
+                type="checkbox" 
+                onChange={(e) => handleCategoryClick(e,"полиращи пасти и падове")} 
+                checked = {selectedCategories.includes("полиращи пасти и падове")}
+                /> полиращи пасти и падове
             </li>
           </ul>
         </div>
