@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../cart/CartContext";
+import {Cart2} from "../cart/CartPage";
 import Comments from './Coments';
 
 export default function ProductDetails() {
@@ -18,23 +19,41 @@ export default function ProductDetails() {
     review} = Comments();
 
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `http://localhost:3030/jsonstore/advanced/articles/details/${productId}`
-      );
+    useEffect(() => {
+      let isMounted = true;
+    
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:3030/jsonstore/advanced/articles/details/${productId}`
+          );
 
-      if (response.statusText === "No Content") {
-        navigate("/not-found");
-        return;
-      }
-      
-      const result = await response.json();
-      setProduct(result);
-      setQuantity(result.quantity);
-
-    })();
-  }, [productId,navigate]);
+          if (!response.ok) {
+            navigate("/not-found");
+            return;
+          }
+    
+          const result = await response.json();
+    
+          if (isMounted) {
+            setProduct(result);
+            const initialQuantity = location.state?.quantity || result.quantity || 1;
+            setQuantity(initialQuantity);
+          }
+        } catch (error) {
+          console.error("Failed to fetch product:", error);
+          if (isMounted) {
+            navigate("/error");
+          }
+        }
+      };
+    
+      fetchData();
+    
+      return () => {
+        isMounted = false;
+      };
+    }, [productId, navigate, location.state]);
 
   const handleQuantityChange = (event) =>{
     const newQuantity = parseInt(event.target.value,10);
@@ -121,8 +140,8 @@ export default function ProductDetails() {
 
             <div className="commentsContainer">
               {submittedReviews.map((review, index) => (
-                <div className="comments">
-                  <div key={index}> 
+                <div key={review.id} className="comments">
+                  <div> 
                     <div className="avatar">{review.name.charAt(0)}</div>
                     <div className="message-content">
                       <div className="message-header">

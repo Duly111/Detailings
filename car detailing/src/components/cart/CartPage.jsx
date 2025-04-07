@@ -5,6 +5,7 @@ import { useCart } from "./CartContext";
 export default function Cart() {
   const { cartItems, removeFromCart } = useCart();
   const [cartProducts, setCartProducts] = useState([]);
+  const [quantityCart,setquantityCart] = useState(0);
 
   useEffect(() => {
     console.log("Cart items updated:", cartItems);
@@ -51,9 +52,15 @@ export default function Cart() {
                   return (
                     <tr key={item._id}>
                       <td className="product">
-                      <button className="remove" onClick={() => handelRemove(item._id)}>✖</button>
+                      <button className="remove" onClick={() => {handelRemove(item._id),setquantityCart(item.quantity)}}>✖</button>
                         <img src={item.image} alt={item.title} />
-                        <Link to={`/products/${item._id}`} key={item._id}>{item.title}</Link>
+                        <Link 
+                          to={`/products/${item._id}`}
+                          state={{quantity: item.quantity}} 
+                          key={item._id}
+                        >
+                          {item.title}
+                        </Link>
                       </td>
                       <td>{item.price} лв.</td>
                       <td>
@@ -112,4 +119,9 @@ export default function Cart() {
       </div>
     </>
   );
+
+}
+
+export function Cart2() {
+
 }
