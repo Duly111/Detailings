@@ -107,6 +107,11 @@ nav a:hover {
 
 
 /* Product Section */
+.price-label{
+    display: flex;
+    justify-content: space-around;
+}
+
 .product-section {
     width: 75%;  /* Увеличена ширина за по-добро представяне на продуктите */
     padding: 20px;
@@ -161,6 +166,15 @@ nav a:hover {
   margin-top: 10px;
 }
 
+.clear-filter{
+    padding: 4px;
+    border-radius: 5px ;
+    border: 0.5px solid;
+}
+.clear-filter:hover{
+    background-color: #e1dcdc;
+}
+
 .product-item h4 {
   color: #333;
   font-size: 18px;
@@ -178,6 +192,10 @@ nav a:hover {
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.slider{
+    width: 100%;
 }
 
 /* Винаги показвай текстовата информация */

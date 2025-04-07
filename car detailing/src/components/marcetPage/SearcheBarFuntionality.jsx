@@ -5,7 +5,8 @@ export const useProductFilter = () => {
     const [products, setProducts] = useState([]);
     const [inputText, setInputText] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]); 
-    const [selectedCategory, setSelectedCategory] = useState(""); 
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [sliderValue,setSliderValue] = useState(0); 
 
     useEffect(() => {
         (async () => {
@@ -40,8 +41,14 @@ export const useProductFilter = () => {
             );
         }
 
+        if(sliderValue > 0){
+            filtered = filtered.filter((product)=>
+                product.price <= sliderValue
+            );
+        }
+
         setFilteredProducts(filtered);
-    }, [inputText, selectedCategory, products]);
+    }, [inputText, selectedCategory, products,sliderValue]);
 
     const inputHandler = (e) => {
         setInputText(e.target.value.toLowerCase());
@@ -49,8 +56,11 @@ export const useProductFilter = () => {
 
     const filterByCategory = (category) => {
         setSelectedCategory(category);
+        if(sliderValue > 0){
+            setSliderValue(sliderValue);   
+        }
     };
 
-    return { inputHandler, filteredProducts, inputText, filterByCategory };
+    return { inputHandler, filteredProducts, inputText, filterByCategory,sliderValue,setSliderValue };
 };
 

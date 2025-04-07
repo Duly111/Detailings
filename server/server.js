@@ -464,7 +464,7 @@ const transporter = nodemailer.createTransport({
             from: 'ivailoradulov05@gmail.com', // Трябва да съвпада с auth.user
             to: email,
             subject: `Ново съобщение от NeshevDetailing`,
-            text: `Работим но вашия казус за най-бързо отстраняване`,
+            text: `Работим по вашия казус, за най-бързо отстраняване на проблема.`,
           });
       
       

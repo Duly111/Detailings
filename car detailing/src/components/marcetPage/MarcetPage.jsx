@@ -3,10 +3,20 @@ import {useEffect,useState} from "react"
 import { useProductFilter } from "./SearcheBarFuntionality";
 
 export default function MarcetPage() {
-  const { inputHandler, filteredProducts, inputText, filterByCategory } = useProductFilter();
+  const { inputHandler, filteredProducts, inputText, filterByCategory,sliderValue,setSliderValue } = useProductFilter();
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedCategories, setSelectedCategories] = useState([]);
+  
+
+  const handleSliderValue = (e) =>{
+    setSliderValue(e.target.value);
+  }
+
+  function clearFunction (){
+    setSliderValue(0);
+    
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -55,10 +65,10 @@ export default function MarcetPage() {
         <div className="filter-section">
           <h3>Ценови Диапазон</h3>
           <div className="price-range">
-            <input type="range" min={0} max={100} defaultValue={0} className="slider" />
+            <input type="range" min={0} max={1000} step={10} value={sliderValue} onChange={handleSliderValue}  className="slider" />
             <div className="price-label">
-              <span>лв.0 - лв.0</span>
-              <button className="clear-filter" onClick={() => navigate("/marcet")}>Премахни Филтър</button>
+              <span>лв.0 - лв.{sliderValue}</span>
+              <button className="clear-filter" onClick={() => {navigate("/marcet"),setSliderValue(0)}}>Премахни Филтър</button>
             </div>
           </div>
           <h3>Категории</h3>
@@ -96,9 +106,6 @@ export default function MarcetPage() {
               onChange={inputHandler}
               value={inputText} 
             />
-            <select>
-              <option value="">Всички Категории</option>
-            </select>
           </div>
           <div className="results-info">
             <p>Показване на 1-9 от {filteredProducts.length} резултата</p>
