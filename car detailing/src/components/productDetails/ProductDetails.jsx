@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../cart/CartContext";
-import {Cart2} from "../cart/CartPage";
+
 import Comments from './Coments';
 
 export default function ProductDetails() {
@@ -140,7 +140,7 @@ export default function ProductDetails() {
 
             <div className="commentsContainer">
               {submittedReviews.map((review, index) => (
-                <div key={review.id} className="comments">
+                <div key={index} className="comments">
                   <div> 
                     <div className="avatar">{review.name.charAt(0)}</div>
                     <div className="message-content">

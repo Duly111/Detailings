@@ -122,6 +122,3 @@ export default function Cart() {
 
 }
 
-export function Cart2() {
-
-}
